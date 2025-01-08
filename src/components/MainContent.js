@@ -55,8 +55,8 @@ function MainContent(){
   const sunsetTime = getForecast.forecast.forecastday[0].astro.sunset
 
   const nonFormmatedTime = getForecast.location.localtime
-  // const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
-  const date = parseISO(nonFormmatedTime)
+  const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  // const date = parseISO(nonFormmatedTime)
   const dayOfWeek = format(date, 'EEEE')
   const formattedMonth = format(date, 'MMM')
   const dayOfMonth = format(date, 'd')
@@ -64,14 +64,14 @@ function MainContent(){
   let filteredHours = []
 
   let goingThruHours = 0
-  const currentTime = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
-  // const currentTime = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  // const currentTime = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  const currentTime = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
 
   while(filteredHours.length !== 6){
     const nonFormmatedTime = getForecast.forecast.forecastday[0].hour[goingThruHours].time
     // console.log('here is the followingFormattedTime: ', followingFormattedTime)
-    // const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
-    const date = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+    const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+    // const date = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
     const followingFormattedTime = format(date, 'hh:mm a')
     // console.log('here is the followingFormattedTime: ', followingFormattedTime)
     const followingHourImage = getForecast.forecast.forecastday[0].hour[goingThruHours].condition.icon
