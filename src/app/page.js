@@ -7,15 +7,15 @@ import TodaysWeather from "@/components/TodaysWeather";
 
 export default async function Home() {
   const getGeneralLocation = await getIpData()
-  // console.log("json-ip-data: ", getGeneralLocation)
-  // console.log("json-ip: ", getGeneralLocation.ip)
-  // console.log("json-country: ", getGeneralLocation.country)
+  console.log("json-ip-data: ", getGeneralLocation)
+  console.log("json-ip: ", getGeneralLocation.ip)
+  console.log("json-country: ", getGeneralLocation.country)
 
   const passIpAddress = getGeneralLocation.ip
   const countryName = getGeneralLocation.country
 
   const getForecast = await fetchWeatherData(passIpAddress)
-  // console.log('here is the current forecast: ', getForecast)
+  console.log('here is the current forecast: ', getForecast)
 
 
   const name = getForecast.location.name
