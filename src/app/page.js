@@ -86,67 +86,82 @@ export default async function Home() {
   console.log('here are the filtered hours: ', filteredHours)
 
   return (
-    <section className="text-black px-4 pt-6 border-2 border-black bg-yellow-400 max-w-fit mx-auto">
+    <section className=" mt-10 text-black px-4 pt-6 border-2 border-black bg-yellow-400 max-w-fit mx-auto">
       {/* items-center */}
       {/* justify-center */}
+      
       <h1 className=" text-center text-[24px] font-bold border-2 border-black rounded-[10px] bg-[#c0c0d9]">
         Weather App
       </h1>
+      
       <div className=" flex flex-col">
-        <div className=" flex flex-col justify-center">
-          <h1 className="justify-self-center text-[23px] pt-4">{name}, {country}</h1>
-          <h2 className="text-[17.5px]">{formattedMonth} {dayOfMonth}, {dayOfWeek}</h2>
-        </div>
-        {/* justify-center */}
-        <div className=" flex gap-[11px] justify-center">
-          <div>
-            <Image
-              src={`https:${currentWeatherIcon}`}
-              width={110}
-              height={110}
-              alt="image of the current weather"
-              />
+      <main className="md:flex md:gap-5">
+        <section>
+          <div className=" flex flex-col justify-center">
+            <h1 className="justify-self-center text-[23px] pt-4">{name}, {country}</h1>
+            <h2 className="text-[17.5px]">{formattedMonth} {dayOfMonth}, {dayOfWeek}</h2>
           </div>
-          <div>
-            <h2 className="text-[45px] flex justify-center mt-[11px]">{fahrenheit}<span className="text-[16px]">°F</span></h2>
-            <p className="text-[16px] mt-[-14px] ">{weatherDescription}</p>
-            <p className=" text-[11px]">Feels like: {feelsLike_f}°F</p>
+          {/* justify-center */}
+          <div className=" flex gap-[11px] justify-center">
+            <div>
+              <Image
+                src={`https:${currentWeatherIcon}`}
+                width={110}
+                height={110}
+                alt="image of the current weather"
+                />
+            </div>
+            <div>
+              <h2 className="text-[45px] flex justify-center mt-[11px]">{fahrenheit}<span className="text-[16px]">°F</span></h2>
+              <p className="text-[16px] mt-[-14px] ">{weatherDescription}</p>
+              <p className=" text-[11px]">Feels like: {feelsLike_f}°F</p>
+            </div>
           </div>
-        </div>
-
-        <div className="border-b-2 border-black w-[85%] self-center"></div>
-
-        <section className="flex justify-center gap-[30px] text-center pt-5 pb-4">
-            <div className="flex flex-col">
-              <span>{highTemperature}</span>
-              <span>High</span>
-            </div>
-            <div className="flex flex-col">
-              <span>{windByMph} mph</span>
-              <span>Wind</span>
-            </div>
-            <div className="flex flex-col">
-              <span>{sunriseTime}</span>
-              <span>Sunrise</span>
-            </div>
         </section>
 
-        <section className="flex justify-center gap-[30px] text-center pb-5">
-            <div className="flex flex-col">
-              <span>{highTemperature}</span>
-              <span>Low</span>
-            </div>
-            <div className="flex flex-col">
-              <span>{getHumidity}%</span>
-              <span>Humidity</span>
-            </div>
-            <div className="flex flex-col">
-              <span>{sunsetTime}</span>
-              <span>Sunset</span>
-            </div>
+          <section>
+            <div className="m-[auto] border-b-2 border-black w-[85%] self-center md:hidden"></div>
+            <div className="md:border-black md:border-l-[2.5px] md:h-40 md:mt-6"></div>
+          </section>
+
+        <section className="md:content-end">
+          <section className="flex justify-center gap-[30px] text-center pt-5 pb-4">
+              <div className="flex flex-col">
+                <span>{highTemperature}</span>
+                <span>High</span>
+              </div>
+              <div className="flex flex-col">
+                <span>{windByMph} mph</span>
+                <span>Wind</span>
+              </div>
+              <div className="flex flex-col">
+                <span>{sunriseTime}</span>
+                <span>Sunrise</span>
+              </div>
+          </section>
+
+          <section className="flex justify-center gap-[30px] text-center pb-5">
+              <div className="flex flex-col">
+                <span>{highTemperature}</span>
+                <span>Low</span>
+              </div>
+              <div className="flex flex-col">
+                <span>{getHumidity}%</span>
+                <span>Humidity</span>
+              </div>
+              <div className="flex flex-col">
+                <span>{sunsetTime}</span>
+                <span>Sunset</span>
+              </div>
+          </section>
         </section>
 
-        <div className="border-b-2 border-black w-[85%] self-center"></div>
+      </main>
+
+        <section className="">
+          <div className="m-[auto] border-b-2 border-black w-[85%] self-center md:hidden"></div>
+        </section>
+
         <section className="pt-4">
           <h2>Today's Weather:</h2>
           <div className="pt-2 pb-4 flex gap-[7px]">
