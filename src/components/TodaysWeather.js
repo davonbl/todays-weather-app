@@ -21,6 +21,7 @@ function TodaysWeather({filteredHours}){
                         width={60}
                         height={60}
                         alt={`image of the weather around ${ele.followingFormattedTime}`}
+                        priority={true}
                       />
                       <p>{ele.followingFormattedTime}</p>
                     </div>
