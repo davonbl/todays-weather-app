@@ -5,7 +5,9 @@ dotenv.config()
 const nextConfig = {
     reactStrictMode: true,
     env: {
-        WEATHER_API_KEY: process.env.WEATHER_API_KEY
+        WEATHER_API_KEY: process.env.WEATHER_API_KEY,
+        IP_API_KEY: process.env.IP_API_KEY
+
     },
     images: {
         remotePatterns:[

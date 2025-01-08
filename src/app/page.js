@@ -1,10 +1,20 @@
 import Image from "next/image";
 import { format, parse } from "date-fns";
 
-const fetchData = async() => {
+const getIpData = async() => {
+  try {
+    const request = await fetch(`https://ipinfo.io/json?token=${process.env.IP_API_KEY}`)
+    const jsonResponse = await request.json()
+    return jsonResponse
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const fetchWeatherData = async(passIpAddress) => {
   try {
     const weatherURL = 'https://api.weatherapi.com/v1/'
-    const fetchForecast = await fetch(`${weatherURL}forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto:ip&days=1`)
+    const fetchForecast = await fetch(`${weatherURL}forecast.json?key=${process.env.WEATHER_API_KEY}&q=${passIpAddress}&days=1`)
     const data = await fetchForecast.json()
     return data
   } catch (error) {
@@ -14,11 +24,20 @@ const fetchData = async() => {
 }
 
 export default async function Home() {
-  const getForecast = await fetchData()
+  const getGeneralLocation = await getIpData()
+  console.log("json-ip-data: ", getGeneralLocation)
+  console.log("json-ip: ", getGeneralLocation.ip)
+  // console.log("json-country: ", getGeneralLocation.country)
+
+  const passIpAddress = getGeneralLocation.ip
+  const countryName = getGeneralLocation.country
+
+  const getForecast = await fetchWeatherData(passIpAddress)
   console.log('here is the current forecast: ', getForecast)
 
+
   const name = getForecast.location.name
-  const country = getForecast.location.country
+  // const country = getForecast.location.country
 
   const fahrenheit = getForecast.current.temp_f
   const feelsLike_f = getForecast.current.feelslike_f
@@ -98,7 +117,7 @@ export default async function Home() {
       <main className="md:flex md:gap-5">
         <section>
           <div className=" flex flex-col justify-center">
-            <h1 className="justify-self-center text-[23px] pt-4">{name}, {country}</h1>
+            <h1 className="justify-self-center text-[23px] pt-4">{name}, {countryName}</h1>
             <h2 className="text-[17.5px]">{formattedMonth} {dayOfMonth}, {dayOfWeek}</h2>
           </div>
           {/* justify-center */}
