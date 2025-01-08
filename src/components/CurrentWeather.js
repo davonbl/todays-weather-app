@@ -33,6 +33,7 @@ function CurrentWeather(props){
                         width={110}
                         height={110}
                         alt="image of the current weather"
+                        priority={true}
                         />
                     </div>
                     <div>
