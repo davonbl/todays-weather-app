@@ -1,21 +1,11 @@
 "use client"
 
 import useSWR from 'swr';
-import { format, parse } from "date-fns";
+import { format, parse, parseISO } from "date-fns";
 import fetcher from '@/api/fetcherData';
 import fetchWeatherData from "@/api/fetchWeatherData";
 import CurrentWeather from "@/components/CurrentWeather";
 import TodaysWeather from "@/components/TodaysWeather";
-
-// const fetcher = async (url) => {
-//     try {
-//         const request = await fetch(url)
-//         const jsonResponse = await request.json()
-//         return jsonResponse
-//       } catch (error) {
-//         console.error(error)
-//       }
-// }
 
 function MainContent(){
   
@@ -65,7 +55,8 @@ function MainContent(){
   const sunsetTime = getForecast.forecast.forecastday[0].astro.sunset
 
   const nonFormmatedTime = getForecast.location.localtime
-  const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  // const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  const date = parseISO(nonFormmatedTime)
   const dayOfWeek = format(date, 'EEEE')
   const formattedMonth = format(date, 'MMM')
   const dayOfMonth = format(date, 'd')
@@ -73,10 +64,14 @@ function MainContent(){
   let filteredHours = []
 
   let goingThruHours = 0
-  const currentTime = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  const currentTime = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+  // const currentTime = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+
   while(filteredHours.length !== 6){
     const nonFormmatedTime = getForecast.forecast.forecastday[0].hour[goingThruHours].time
-    const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+    // console.log('here is the followingFormattedTime: ', followingFormattedTime)
+    // const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+    const date = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
     const followingFormattedTime = format(date, 'hh:mm a')
     // console.log('here is the followingFormattedTime: ', followingFormattedTime)
     const followingHourImage = getForecast.forecast.forecastday[0].hour[goingThruHours].condition.icon
