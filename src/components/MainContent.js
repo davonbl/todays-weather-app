@@ -1,7 +1,7 @@
 "use client"
 
 import useSWR from 'swr';
-import { format, parse, parseISO } from "date-fns";
+import { format, parse } from "date-fns";
 import fetcher from '@/api/fetcherData';
 import fetchWeatherData from "@/api/fetchWeatherData";
 import CurrentWeather from "@/components/CurrentWeather";
@@ -25,16 +25,16 @@ function MainContent(){
 
   const getGeneralLocation = ipData
   // const getGeneralLocation = await getIpData()
-  console.log("json-ip-data: ", getGeneralLocation)
-  console.log("json-ip: ", getGeneralLocation.ip)
-  console.log("json-country: ", getGeneralLocation.country)
+  // console.log("json-ip-data: ", getGeneralLocation)
+  // console.log("json-ip: ", getGeneralLocation.ip)
+  // console.log("json-country: ", getGeneralLocation.country)
 
   const passIpAddress = getGeneralLocation.ip
   const countryName = getGeneralLocation.country
 
   const getForecast = weatherData
   // const getForecast = await fetchWeatherData(passIpAddress)
-  console.log('here is the current forecast: ', getForecast)
+  // console.log('here is the current forecast: ', getForecast)
 
 
   const name = getForecast.location.name
@@ -55,29 +55,35 @@ function MainContent(){
   const sunsetTime = getForecast.forecast.forecastday[0].astro.sunset
 
   const nonFormmatedTime = getForecast.location.localtime
+  // console.log('nonFormattedTime: ',nonFormmatedTime)
+
+  
   const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
-  // const date = parseISO(nonFormmatedTime)
   const dayOfWeek = format(date, 'EEEE')
   const formattedMonth = format(date, 'MMM')
   const dayOfMonth = format(date, 'd')
 
   let filteredHours = []
-
   let goingThruHours = 0
-  // const currentTime = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+
   const currentTime = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
 
-  while(filteredHours.length !== 6){
-    const nonFormmatedTime = getForecast.forecast.forecastday[0].hour[goingThruHours].time
-    // console.log('here is the followingFormattedTime: ', followingFormattedTime)
-    const date = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
-    // const date = parseISO(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
-    const followingFormattedTime = format(date, 'hh:mm a')
-    // console.log('here is the followingFormattedTime: ', followingFormattedTime)
+  while(filteredHours.length <= 5){
+    const hourlyData = getForecast.forecast.forecastday[0].hour[goingThruHours]
+
+    if(!hourlyData){
+      console.log(`No data found for hour index: ${goingThruHours}`)
+      break;
+    }
+
+
+    const nonFormmatedTime = hourlyData.time
+    const parsedTime = parse(nonFormmatedTime, 'yyyy-MM-dd HH:mm', new Date())
+    const followingFormattedTime = format(parsedTime, 'hh:mm a')
+
     const followingHourImage = getForecast.forecast.forecastday[0].hour[goingThruHours].condition.icon
     const followingHourText = (getForecast.forecast.forecastday[0].hour[goingThruHours].condition.text).trim()
     const followingHourTemperature = getForecast.forecast.forecastday[0].hour[goingThruHours].temp_f
-
 
     const followingHourTempObject = {
       followingFormattedTime,
@@ -85,12 +91,12 @@ function MainContent(){
       followingHourTemperature,
       followingHourText
     }
-    if(date.getTime() > currentTime){
+
+    if(parsedTime.getTime() > currentTime.getTime()){
       filteredHours = [...filteredHours, followingHourTempObject]
-      goingThruHours = goingThruHours + 1
-    }else{
-      goingThruHours = goingThruHours + 1
     }
+
+    goingThruHours++
   }
 
   // console.log('here are the filtered hours: ', filteredHours)
