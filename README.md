@@ -1,4 +1,4 @@
-# Today's Weatjher Application
+# Today's Weather Application
 
 This is nextJS application.
 
