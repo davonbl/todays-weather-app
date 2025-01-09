@@ -1,37 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Todo Server Application
 
-## Getting Started
+This is a project that is a nodeJS and expressJS application.
 
-First, run the development server:
+This project allows users to fetch and experiement with the endpoints, and decide if it fits there use-case for their front-end application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tools needed
+- Visual Studio Code (VSC) Editor (recommended)
+- Git bash (recommended)
+- Postgres database
+- Postman (or similar tools)
+- This Github repo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ```bash
+    git clone https://github.com/davonbl/todo-server.git
+    ```
 
-## Learn More
+2. After entering either the client or server directory, install the dependencies in the client and server directories:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Start the development server:
+    - Client
+    ```bash
+    npm run dev
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Create a `.env` file in the server root directory. This is where your keys from your remote platorm service will be saved.
 
-## Deploy on Vercel
+    ```
+    DATABASE_URL=TBD
+    POSTGRES_DATABASE=TBD
+     ```
+4. Now you should be able to utilize this application. Cheers!
+## Documentation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# todays-weather-app
+- NodeJS :  https://nodejs.org/docs/latest/api/
+- Express : https://expressjs.com/
+- Postman : https://www.postman.com/api-documentation-tool/
